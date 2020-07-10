@@ -1,0 +1,19 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Track</ion-title>
+    <ion-buttons slot='start'>
+      <ion-back-button defaultHref="/orders"></ion-back-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen *ngIf='order'>
+  <ion-label lines='full' color='secondary'>Order: {{order.orderName}}</ion-label>
+  <ion-item>Items: {{order.items}}</ion-item>
+  <ion-item>Latitude: {{order.lat}}</ion-item>
+  <ion-item>Longtitude: {{order.long}}</ion-item>
+  <ion-item>Delivery Time: {{order.timeToDeliver}}</ion-item>
+ 
+</ion-content>
+

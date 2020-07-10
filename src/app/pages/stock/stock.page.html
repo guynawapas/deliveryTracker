@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Stock</ion-title>
+    <ion-buttons slot='start'>
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+  <ion-item lines='inset'  *ngFor='let stock of stocks'>
+    <p>{{stock.itemList}}</p>
+
+  </ion-item>
+</ion-list>
+</ion-content>

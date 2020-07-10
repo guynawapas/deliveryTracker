@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Stock</ion-title>
+    <ion-buttons slot='start'>
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+  <ion-list lines='full'>
+    
+    <ion-item>
+      <ion-input required type='number' placeholder='item1' [(ngModel)]='stock.item1'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input required type='number' placeholder='item2' [(ngModel)]='stock.item2'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input required type='number' placeholder='item3' [(ngModel)]='stock.item3'></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+
+</ion-content>
+<ion-fab horizontal='end' vertical='bottom'>
+
+  <ion-fab-button (click)="saveStock()">Save</ion-fab-button>
+
+</ion-fab>

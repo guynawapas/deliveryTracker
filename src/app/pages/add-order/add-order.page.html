@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Order</ion-title>
+    <ion-buttons slot='start'>
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-list lines='full'>
+    <ion-item>
+      <ion-input required type='text' placeholder="OrderName" [(ngModel)]='order.orderName'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input required type='Array<string>' placeholder="items" [(ngModel)]='order.items'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input required type='number' placeholder='lat' [(ngModel)]='order.lat'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input required type='number' placeholder='long' [(ngModel)]='order.long'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input required type='number' placeholder='Time To Deliver' [(ngModel)]='order.timeToDeliver'></ion-input>
+    </ion-item>
+  </ion-list>
+  
+  
+</ion-content>
+<ion-fab horizontal='start' vertical='bottom'>
+
+  <ion-fab-button  (click)="clearFields()">Clear</ion-fab-button>
+
+</ion-fab>
+<ion-fab horizontal='end' vertical='bottom'>
+
+  <ion-fab-button (click)="saveOrder()">Save</ion-fab-button>
+
+</ion-fab>
+  
