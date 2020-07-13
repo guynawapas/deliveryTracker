@@ -38,6 +38,10 @@ const routes: Routes = [
     path: 'add-stock',
     loadChildren: () => import('./pages/add-stock/add-stock.module').then( m => m.AddStockPageModule)
   },
+  {
+    path: 'order-with-dict',
+    loadChildren: () => import('./pages/order-with-dict/order-with-dict.module').then( m => m.OrderWithDictPageModule)
+  },
   
 ];
 

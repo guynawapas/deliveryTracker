@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Order, OrderService } from 'src/app/services/order.service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
-
+import { NavController, PickerController } from '@ionic/angular';
+import {PickerOptions} from '@ionic/core';
 @Component({
   selector: 'app-add-order',
   templateUrl: './add-order.page.html',
@@ -10,55 +10,96 @@ import { NavController } from '@ionic/angular';
 })
 export class AddOrderPage implements OnInit {
   order:Order={
-    orderName:"",
-    items:[],
+    orderId:"",
+    items:'',
     lat:undefined,
     long:undefined,
-    timeToDeliver:undefined
+    time:undefined,
+    date:'',
+    
   }
-  orderId=null;
-
+  
+  d = new Date();
+  minDate=new Date().toISOString();
+  maxDate=new Date().toISOString();
+  
   constructor(private orderService: OrderService, 
     private route:ActivatedRoute,
-    private nav:NavController) { }
+    private nav:NavController,
+    private pickerCtrl:PickerController) { }
 
   ngOnInit() {
-    this.orderId=this.route.snapshot.params['id'];
-    if(this.orderId){
-      this.loadOrder();
-    }
+    
+    this.d.setDate(this.d.getDate()+1);
+    this.maxDate=this.d.toISOString();
+    
   }
 
-  loadOrder(){
-    this.orderService.getOrder(this.orderId).subscribe(res =>{
-      this.order=res;
-    })
-
-
-  }
+  
   saveOrder(){
     //fields not filled
-    if(this.order.orderName=="" ||
-     this.order.items==[] || 
+    if(this.order.orderId=="" ||
+     this.order.items=='' || 
      this.order.lat==undefined || 
      this.order.long==undefined || 
-     this.order.timeToDeliver==undefined){
+     this.order.time==undefined||
+     this.order.date==''){
       return;
     }
-    if(this.orderId){
-      this.orderService.updateOrder(this.order,this.orderId);
-    }else{
+    
       this.orderService.addOrder(this.order);
       this.nav.navigateBack('orders');
-    }
+    
 
   }
   clearFields(){
-    this.order.orderName="";
-    this.order.items=[];
+    this.order.orderId="";
+    this.order.items='';
     this.order.lat=undefined;
     this.order.long=undefined;
-    this.order.timeToDeliver=undefined;
+    this.order.time=undefined;
+    this.order.date='';
   }
+
+  // async showTimePicker(){
+  //   let opts:PickerOptions={
+  //     buttons: [
+  //       {
+  //         text: "Cancel",
+  //         role: 'cancel'
+  //       },
+  //       {
+  //         text:'Ok',
+  //         handler:(value:any) => {
+  //           console.log(value);
+  //         }
+  //       }
+  //     ],
+  //     columns:[
+  //       {
+  //         name:"timeOptions",
+  //         options:[
+  //           {text:"8:00-10:00",value:8},
+  //           {text:"10:00-12:00",value:10},
+  //           {text:"12:00-14:00",value:12},
+  //           {text:"14:00-16:00",value:14},
+  //           {text:"16:00-18:00",value:16},
+  //         ]
+  //       }
+
+  //     ]
+
+  //   };
+  //   let picker =await this.pickerCtrl.create(opts);
+  //   picker.present();
+  //   picker.onDidDismiss().then(async date =>{
+  //     let col = await picker.getColumn('timeOptions');
+  //     this.order.time=col.options[col.selectedIndex].value;
+  //     console.log(this.order.time);
+      
+  //   });
+    
+  // }
+
 
 }

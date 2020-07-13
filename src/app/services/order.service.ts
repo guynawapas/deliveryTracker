@@ -4,18 +4,22 @@ import { Observable } from 'rxjs';
 import{ map } from 'rxjs/operators';
 
 export interface Order{
-  orderName:string;
-  items:Array<string>;
+  orderId:string;
+  items:string;
   lat:number;
   long:number;
-  timeToDeliver:number;
+  date:string;
+  time:number;
+
 }
+
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class OrderService {
+ 
   private orderCollection:AngularFirestoreCollection<Order>;
   private orders: Observable<Order[]>;
   constructor(db: AngularFirestore) { 
@@ -30,6 +34,7 @@ export class OrderService {
       });
     })
     );
+
   }
 
   getOrders(){

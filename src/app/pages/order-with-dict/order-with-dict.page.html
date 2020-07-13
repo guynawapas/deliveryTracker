@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add OrderWithDict</ion-title>
+    <ion-buttons slot='start'>
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines='full'>
+    <ion-item>
+      <ion-label>Item 1 amount</ion-label>
+      <ion-input slot='end' type='number' placeholder='item1 number' [(ngModel)]='item1' ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Item 2 amount</ion-label>
+      <ion-input slot='end' type='number' placeholder='item2 number'[(ngModel)]='item2' ></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-fab horizontal='end' vertical='bottom'>
+
+  <ion-fab-button (click)="saveOrder()">Save</ion-fab-button>
+
+</ion-fab>
