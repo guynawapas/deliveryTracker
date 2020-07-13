@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order, OrderService } from 'src/app/services/order.service';
 import { NavController } from '@ionic/angular';
 import { isNgTemplate } from '@angular/compiler';
+import { OrderWithDict, OrderWithDictService } from 'src/app/services/order-with-dict.service';
 
 @Component({
   selector: 'app-orders',
@@ -9,16 +10,16 @@ import { isNgTemplate } from '@angular/compiler';
   styleUrls: ['./orders.page.scss'],
 })
 export class OrdersPage implements OnInit {
-  orders:Order[];
-  nearOrders:Order[]=[];
-  constructor(private orderService: OrderService, private nav:NavController) { }
+  orders:OrderWithDict[];
+  nearOrders:OrderWithDict[]=[];
+  constructor(private orderWithDictService: OrderWithDictService, private nav:NavController) { }
 
   ngOnInit() {
-    this.orderService.getOrders().subscribe(res =>{
+    this.orderWithDictService.getOrders().subscribe(res =>{
        this.orders=res;
-       //console.log(this.orders);
+       console.log(this.orders);
        //filter called here cus it broke when call outside...
-      this.filterOrders();
+      //this.filterOrders();
        //console.log(this.nearOrders);
 
     });
@@ -34,7 +35,7 @@ export class OrdersPage implements OnInit {
   }
 
   remove(item){
-    this.orderService.removeOrder(item.id);
+    this.orderWithDictService.removeOrder(item.id);
   }
  
 }

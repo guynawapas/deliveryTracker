@@ -4,10 +4,13 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface OrderWithDict{
-  [key:string]:any;
-  
+  items:{[key:string]:number,item2:number};
+  orderId:string;
+  lat:number;
+  long:number;
+  date:string;
+  time:number;
 }
-
 
 
 @Injectable({

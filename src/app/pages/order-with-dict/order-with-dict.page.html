@@ -10,6 +10,19 @@
 <ion-content>
   <ion-list lines='full'>
     <ion-item>
+      <ion-label >OrderId</ion-label>
+      <ion-input slot='end'required type='text' placeholder="OrderId" [(ngModel)]='order.orderId'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Item1 name</ion-label>
+      <ion-select interface="popover" [(ngModel)]='itemName'>
+        <ion-select-option value="Pork">Pork</ion-select-option>
+        <ion-select-option value="Beef">Beef</ion-select-option>
+        <ion-select-option value="Radish">Radish</ion-select-option>
+        <ion-select-option value="Beetroot">Beetroot</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
       <ion-label>Item 1 amount</ion-label>
       <ion-input slot='end' type='number' placeholder='item1 number' [(ngModel)]='item1' ></ion-input>
     </ion-item>
@@ -17,6 +30,31 @@
       <ion-label>Item 2 amount</ion-label>
       <ion-input slot='end' type='number' placeholder='item2 number'[(ngModel)]='item2' ></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label >Latitude</ion-label>
+      <ion-input slot='end'required type='number' placeholder='lat' [(ngModel)]='order.lat'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label >Longtitude</ion-label>
+      <ion-input slot='end'required type='number' placeholder='long' [(ngModel)]='order.long'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label >DD MM</ion-label>
+      <ion-datetime displayFormat='DD/MM' placeholder='DD MM' [min]='minDate' [max]='maxDate' [(ngModel)]='order.date'></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Time to Deliver</ion-label>
+      <ion-select interface="popover" [(ngModel)]='order.time'>
+        <ion-select-option value=8>8:00-10:00</ion-select-option>
+        <ion-select-option value=10>10:00-12:00</ion-select-option>
+        <ion-select-option value=12>12:00-14:00</ion-select-option>
+        <ion-select-option value=14>14:00-16:00</ion-select-option>
+        <ion-select-option value=16>16:00-18:00</ion-select-option>
+        <ion-select-option value=18>18:00-20:00</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
   </ion-list>
 </ion-content>
 <ion-fab horizontal='end' vertical='bottom'>
