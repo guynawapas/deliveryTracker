@@ -16,9 +16,13 @@
          {{item.orderId}}
           <p>Latitude:  {{item.lat}}</p>
           <p>Longtitude:  {{item.long}}</p>
-          <p>Items:  {{item.items}}</p>
+          <p>Items: </p>
+          <p *ngFor='let items of item.items | keyvalue'>
+             ○ {{items.key}}: {{items.value}}
+            </p>
           <p>Time to delivery:  {{item.time}}</p>
         </ion-label>
+        
       </ion-item>
 
       <ion-item-options side='end'>

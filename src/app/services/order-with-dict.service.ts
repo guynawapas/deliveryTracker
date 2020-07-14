@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface OrderWithDict{
-  items:{[key:string]:number,item2:number};
+  items:{[key:string]:number};
   orderId:string;
   lat:number;
   long:number;

@@ -11,14 +11,15 @@ import { NavController } from '@ionic/angular';
 export class OrderWithDictPage implements OnInit {
 //order:OrderWithDict=new Map();
 order:OrderWithDict={
-  items:{item2:undefined},
+  items:{},
   orderId:'',
   lat:undefined,
   long:undefined,
   time:undefined,
   date:'',
 };
-itemName:string;
+item1Name:string;
+item2Name:string;
 item1:number;
 item2:number;
   constructor(private orderWithDictService:OrderWithDictService,
@@ -35,8 +36,8 @@ item2:number;
   }
   saveOrder(){
     
-    this.order.items[this.itemName]=this.item1;
-    this.order.items["item2"]=this.item2;
+    this.order.items[this.item1Name]=this.item1;
+    this.order.items[this.item2Name]=this.item2;
     for(const key in this.order){
       console.log(key);
       console.log(this.order[key]);

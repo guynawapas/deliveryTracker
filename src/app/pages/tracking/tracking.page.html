@@ -10,14 +10,12 @@
 
 <ion-content fullscreen *ngIf='order'>
   <ion-item>Order: {{order.orderId}}</ion-item>
-  
-  
   <ion-item>Latitude: {{order.lat}}</ion-item>
   <ion-item>Longtitude: {{order.long}}</ion-item>
   <ion-item>Delivery Time: {{order.time}}</ion-item>
   <ion-list>
     <ion-list-header>
-      Items
+      ITEMS
     </ion-list-header>
     <ion-item *ngFor='let item of order.items | keyvalue'>
       {{item.key}}: {{item.value}}
