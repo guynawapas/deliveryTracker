@@ -18,7 +18,9 @@ declare var google:any;
 })
 export class OrdersPage implements OnInit,AfterContentInit {
   map;
-
+  orders:OrderWithDict[];
+  nearOrders:OrderWithDict[]=[];
+  intervalOrders:OrderWithDict[]=[];
   @ViewChild('mapElement', {static:true}) mapElement;
   infoWindows: any = [];
   /*
@@ -26,7 +28,7 @@ export class OrdersPage implements OnInit,AfterContentInit {
   */
 
   
-  markers : any = [
+  markers_ : any = [
     {
       title: "Wat Bowon Niwet",
       latitude: "13.757273",
@@ -43,46 +45,46 @@ export class OrdersPage implements OnInit,AfterContentInit {
       longitude: "100.509804"
     }
   ];
+  markers:any=[];
 
 
-  orders:OrderWithDict[];
-  nearOrders:OrderWithDict[]=[];
-  intervalOrders:OrderWithDict[]=[];
+  
   currentHour:number;
   d= new Date();
   constructor(private orderWithDictService: OrderWithDictService, private nav:NavController) { }
 
-  ngOnInit() {
-    this.orderWithDictService.getOrders().subscribe( res =>{
-       this.orders= res;
-       console.log(this.orders);
-       
-     
-      this.filterInterval();
-    });
-   
-    
-  }
+  ngOnInit() { }
 
   ngAfterContentInit(): void {
-    this.map = new google.maps.Map(
+    this.orderWithDictService.getOrders().subscribe( res =>{
+      this.orders= res;
+      console.log('orders',this.orders);
+      
+      this.filterInterval();
+      this.markers=this.intervalOrders;
+      console.log('markers after = orders',this.markers);
+      this.map = new google.maps.Map(
       this.mapElement.nativeElement,
       {
         center: {lat: 13.7563, lng: 100.5018},
         zoom: 15
       });
-    this.addMarkersToMap(this.markers);
-    console.log(this.infoWindows);
+      this.addMarkersToMap(this.markers);
+      console.log('info windows',this.infoWindows);
+      console.log('markers in aftercontent',this.markers);
+   });
+    
+    
   } 
   
   addMarkersToMap(markers) {
     for(let marker of markers){
-      let position = new google.maps.LatLng(marker.latitude, marker.longitude);
+      let position = new google.maps.LatLng(marker.lat, marker.long);
       let mapMarker = new google.maps.Marker({
         position: position,
-        title: marker.title,
-        latitude: marker.latitude,
-        longitude: marker.longitude
+        title: marker.orderId,
+        latitude: marker.lat,
+        longitude: marker.long
       })
 
       mapMarker.setMap(this.map);
@@ -94,7 +96,7 @@ export class OrdersPage implements OnInit,AfterContentInit {
     let infoWindowContent = '<div id="content">' + 
                               '<h2 id="firstHeading" class"firstHeading">' + marker.title + '</h2>' +
                               '<p>Latitude: ' + marker.latitude + '</p>' +
-                              '<p>Longitude: ' + marker.longitude + '</p>' +
+                              '<p>Longitude: ' + marker.longtitude + '</p>' +
                             '</div>';
 
     let infoWindow = new google.maps.InfoWindow({
@@ -149,22 +151,22 @@ export class OrdersPage implements OnInit,AfterContentInit {
     return nextInterval;
   }
   filterInterval(){
-    //console.log('filter called');
+    console.log('filter called');
   
     let nextInterval = this.getNextInterval();
     let today = this.getCurrentDate();
     for(let ele of this.orders){
      // console.log(ele);
       //add all order needed to be delivered in next interval
-      let x = ele.date.substring(5,7);
+      let x = ele.date.substring(8,10);
       let orderDate:number = +x;
-      //console.log(ele.time,orderDate,x);
+      console.log(ele.time,orderDate,x,today);
       
       if(ele.time==nextInterval && orderDate== today){
         //console.log("pushed!");
         this.intervalOrders.push(ele);
       }
-     //console.log(this.intervalOrders);
     }
+    console.log(this.intervalOrders);
   }
 }
