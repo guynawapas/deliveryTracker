@@ -10,6 +10,7 @@ export interface OrderWithDict{
   long:number;
   date:string;
   time:number;
+  delivered:boolean;
 }
 
 
@@ -19,7 +20,12 @@ export interface OrderWithDict{
 export class OrderWithDictService {
   private orderWithDictCollection:AngularFirestoreCollection<OrderWithDict>;
   private orders: Observable<OrderWithDict[]>;
-  private orderWithDict:OrderWithDict;
+  
+  
+
+  
+
+
   constructor(db: AngularFirestore) {
     this.orderWithDictCollection = db.collection<OrderWithDict>('ordersWithDict');
 
@@ -31,13 +37,13 @@ export class OrderWithDictService {
         return {id,...data};
       });
     })
-    );
+    );//end of this.orders chain thingy
    
   
    }
 
 
-   getOrders(){
+  getOrders(){
     return this.orders;
   }
   getOrder(id){
@@ -57,5 +63,6 @@ export class OrderWithDictService {
   }
 
 
+  
 
 }

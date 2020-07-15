@@ -42,6 +42,10 @@ const routes: Routes = [
     path: 'order-with-dict',
     loadChildren: () => import('./pages/order-with-dict/order-with-dict.module').then( m => m.OrderWithDictPageModule)
   },
+  {
+    path: 'history',
+    loadChildren: () => import('./pages/history/history.module').then( m => m.HistoryPageModule)
+  },
   
 ];
 

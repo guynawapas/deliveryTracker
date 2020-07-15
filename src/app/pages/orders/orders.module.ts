@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { OrdersPageRoutingModule } from './orders-routing.module';
-
+import { RouterModule } from '@angular/router';
 import { OrdersPage } from './orders.page';
 
 @NgModule({
@@ -13,7 +13,12 @@ import { OrdersPage } from './orders.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    OrdersPageRoutingModule
+    OrdersPageRoutingModule,IonicModule,RouterModule.forChild([
+      {
+        path: '',
+        component: OrdersPage
+      }
+    ]),
   ],
   declarations: [OrdersPage]
 })
