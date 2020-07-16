@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { OrderWithDict } from './order-with-dict.service';
 
 export interface Stock{
-  itemList:Array<string>;
-  item1:number;
-  item2:number;
-  item3:number;
+  items:{[key:string]:number};
  
 }
 @Injectable({
@@ -16,6 +14,7 @@ export interface Stock{
 export class StockService {
 private stockCollection:AngularFirestoreCollection<Stock>;
 private stocks: Observable<Stock[]>;
+private stock:Stock;
   constructor(db : AngularFirestore) {
     this.stockCollection = db.collection<Stock>('stocks');
     this.stocks = this.stockCollection.snapshotChanges().pipe(
@@ -42,7 +41,30 @@ private stocks: Observable<Stock[]>;
    addStock(stock:Stock){
      return this.stockCollection.add(stock);
    }
-
+   deductFromStock(order:OrderWithDict){
+     
+    this.getStock("IVpCJOqDuQJTciOpXji1").subscribe(res=>{
+      this.stock=res;
+    });
+    //need delay cuz stock need time to set apparently
+    setTimeout(()=>{
+      let tempStock=this.stock;
+      for(let keyOrder of Object.keys(order.items)){
+        let remainingStock = this.stock.items[keyOrder]-order.items[keyOrder];
+        console.log('deducting: ',keyOrder);
+       
+          if(this.stock.items[keyOrder]<=0||remainingStock<0){//out of stock
+            console.log(keyOrder,'is out of stock!, or not enough stock!');
+            this.stock=tempStock;
+            break;
+          }else{
+            this.stock.items[keyOrder]=remainingStock;
+          }
+     }
+     console.log('end of for loop');
+     this.updateStock(this.stock,"IVpCJOqDuQJTciOpXji1");
+    },500);
+   }
 
    
 }

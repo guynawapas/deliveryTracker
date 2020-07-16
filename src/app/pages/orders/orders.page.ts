@@ -58,11 +58,11 @@ export class OrdersPage implements OnInit,AfterContentInit {
   ngAfterContentInit(): void {
     this.orderWithDictService.getOrders().subscribe( res =>{
       this.orders= res;
-      console.log('orders',this.orders);
+     // console.log('orders',this.orders);
       
       this.filterInterval();
       this.markers=this.intervalOrders;
-      console.log('markers after = orders',this.markers);
+      //console.log('markers after = orders',this.markers);
       this.map = new google.maps.Map(
       this.mapElement.nativeElement,
       {
@@ -70,8 +70,8 @@ export class OrdersPage implements OnInit,AfterContentInit {
         zoom: 15
       });
       this.addMarkersToMap(this.markers);
-      console.log('info windows',this.infoWindows);
-      console.log('markers in aftercontent',this.markers);
+      //console.log('info windows',this.infoWindows);
+      //console.log('markers in aftercontent',this.markers);
    });
     
     
@@ -133,7 +133,7 @@ export class OrdersPage implements OnInit,AfterContentInit {
     this.orderWithDictService.removeOrder(item.id);
   }
   getCurrentHour():number{
-    console.log('getcurrentHour called');
+    //console.log('getcurrentHour called');
     return this.d.getHours();
   }
   getCurrentDate(){
@@ -151,7 +151,7 @@ export class OrdersPage implements OnInit,AfterContentInit {
     return nextInterval;
   }
   filterInterval(){
-    console.log('filter called');
+    //console.log('filter called');
   
     let nextInterval = this.getNextInterval();
     let today = this.getCurrentDate();
@@ -160,13 +160,13 @@ export class OrdersPage implements OnInit,AfterContentInit {
       //add all order needed to be delivered in next interval
       let x = ele.date.substring(8,10);
       let orderDate:number = +x;
-      console.log(ele.time,orderDate,x,today);
+      //console.log(ele.time,orderDate,x,today);
       
       if(ele.time==nextInterval && orderDate== today){
         //console.log("pushed!");
         this.intervalOrders.push(ele);
       }
     }
-    console.log(this.intervalOrders);
+    //console.log(this.intervalOrders);
   }
 }

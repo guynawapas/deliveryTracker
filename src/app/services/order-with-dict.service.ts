@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { StockService } from './stock.service';
 
 export interface OrderWithDict{
   items:{[key:string]:number};
@@ -55,6 +56,7 @@ export class OrderWithDictService {
   }
 
   addOrder(order:OrderWithDict){
+    
     return this.orderWithDictCollection.add(order);
   }
 

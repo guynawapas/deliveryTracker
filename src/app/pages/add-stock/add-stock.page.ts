@@ -10,14 +10,11 @@ import { NavController } from '@ionic/angular';
 })
 export class AddStockPage implements OnInit {
   stock:Stock={
-    itemList:["itemName1","itemName2","itemName3"],
-    item1:undefined,
-    item2:undefined,
-    item3:undefined
+    items:{},
   }
   stockId=null;
-  
-
+  item:string;
+  amount:number;
   
   constructor(private stockService: StockService,
     private route:ActivatedRoute,
@@ -28,22 +25,41 @@ export class AddStockPage implements OnInit {
     this.stockId=this.route.snapshot.params['id'];
     if(this.stockId){
       this.loadStock();
+      
     }
+    
   }
 
   loadStock(){
     this.stockService.getStock(this.stockId).subscribe(res =>{
       this.stock=res;
+      console.log('loadStock',this.stock);
     })
   }
 
   saveStock(){
+    if(!this.amount||!this.item)return console.log('fill everything!');
     if(this.stockId){
+      for(let key of Object.keys(this.stock.items)){
+        if(this.stock.items[this.item]){
+          this.stock.items[this.item]+=this.amount;
+          this.stockService.updateStock(this.stock,this.stockId);
+          this.clearFields();
+          return;
+        }
+      }
+      this.stock.items[this.item]=this.amount;
       this.stockService.updateStock(this.stock,this.stockId);
+      this.clearFields();
     }else{
+      this.stock.items[this.item]=this.amount;
       this.stockService.addStock(this.stock);
       this.nav.navigateBack('home');
     }
+  }
+  clearFields(){
+    this.item='';
+    this.amount=undefined;
   }
 
 

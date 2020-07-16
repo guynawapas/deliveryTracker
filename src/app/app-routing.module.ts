@@ -37,6 +37,9 @@ const routes: Routes = [
   {
     path: 'add-stock',
     loadChildren: () => import('./pages/add-stock/add-stock.module').then( m => m.AddStockPageModule)
+  },{
+    path: 'add-stock/:id',
+    loadChildren: () => import('./pages/add-stock/add-stock.module').then( m => m.AddStockPageModule)
   },
   {
     path: 'order-with-dict',

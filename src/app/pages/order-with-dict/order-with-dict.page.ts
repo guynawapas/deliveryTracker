@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderWithDict, OrderWithDictService} from 'src/app/services/order-with-dict.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { StockService } from 'src/app/services/stock.service';
 /******************************page to add order******************************************/
 @Component({
   selector: 'app-order-with-dict',
@@ -30,7 +31,8 @@ maxDate=new Date().toISOString();
 
   constructor(private orderWithDictService:OrderWithDictService,
     private route:ActivatedRoute,
-    private nav:NavController
+    private nav:NavController,
+    private stockService:StockService
     ) { }
 
   ngOnInit() {
@@ -39,14 +41,16 @@ maxDate=new Date().toISOString();
     
   }
   saveOrder(){
+   
     
+    this.stockService.deductFromStock(this.order);
     this.order.items[this.item1Name]=this.item1;
     this.order.items[this.item2Name]=this.item2;
     this.order.time=+this.time;
-    for(const key in this.order){
-      console.log(key);
-      console.log(this.order[key]);
-    }
+    // for(const key in this.order){
+    //   console.log(key);
+    //   console.log(this.order[key]);
+    // }
     this.orderWithDictService.addOrder(this.order);
     this.nav.navigateBack('orders');
   }
