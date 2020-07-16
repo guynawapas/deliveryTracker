@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Stock</ion-title>
+    <ion-title>Current Stock</ion-title>
     <ion-buttons slot='start'>
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
@@ -8,10 +8,10 @@
 </ion-header>
 
 <ion-content>
-<ion-list>
-  <ion-item lines='inset'  *ngFor='let stock of stocks'>
-    <p>{{stock.itemList}}</p>
-
-  </ion-item>
+<ion-list *ngIf='stock'>
+  <ion-card *ngFor='let ele of stock.items | keyvalue'>
+    {{ele.key}}: {{ele.value}}
+    
+  </ion-card>
 </ion-list>
 </ion-content>

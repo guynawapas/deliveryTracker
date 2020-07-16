@@ -9,11 +9,14 @@ import { NavController } from '@ionic/angular';
 })
 export class StockPage implements OnInit {
   stocks:Stock[];
+  stock:Stock;
   constructor(private stockService: StockService,private nav:NavController) { }
 
   ngOnInit() {
     this.stockService.getStocks().subscribe(res =>{
       this.stocks=res;
+      this.stock=this.stocks[0];
+      console.log(this.stock);
     });
   }
 
