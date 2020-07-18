@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>filter</ion-title>
+    <ion-buttons slot='start'>
+      <ion-back-button defaultHref="/history"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Item</ion-label>
+    <ion-select interface="popover" [(ngModel)]='filters.items' >
+      <ion-select-option value="any">Any</ion-select-option>
+      <ion-select-option value="Pork">Pork</ion-select-option>
+      <ion-select-option value="Beef">Beef</ion-select-option>
+      <ion-select-option value="Radish">Radish</ion-select-option>
+      <ion-select-option value="Beetroot">Beetroot</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Driver</ion-label>
+    <ion-select interface="popover" [(ngModel)]='filters.items' >
+      <ion-select-option value="any">Any</ion-select-option>
+      <ion-select-option value="A01">A01</ion-select-option>
+      <ion-select-option value="A02">A02</ion-select-option>
+      
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label >DD MM</ion-label>
+    <ion-datetime displayFormat='DD/MM' placeholder='DD MM' [(ngModel)]='filters.date'></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Time to Deliver</ion-label>
+    <ion-select interface="popover" [(ngModel)]='filters.time'>
+      <ion-select-option value=8>8:00-10:00</ion-select-option>
+      <ion-select-option value=10>10:00-12:00</ion-select-option>
+      <ion-select-option value=12>12:00-14:00</ion-select-option>
+      <ion-select-option value=14>14:00-16:00</ion-select-option>
+      <ion-select-option value=16>16:00-18:00</ion-select-option>
+      <ion-select-option value=18>18:00-20:00</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label >OrderId</ion-label>
+    <ion-input slot='end'required type='text' placeholder="OrderId" [(ngModel)]='filters.orderId'></ion-input>
+  </ion-item>
+</ion-content>
+<ion-fab horizontal='end' vertical='bottom'>
+
+  <ion-fab-button (click)="saveFilter()" routerLink='/history/f'>Save</ion-fab-button>
+
+</ion-fab>

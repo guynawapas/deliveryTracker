@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>driver status</ion-title>
+    <ion-buttons slot='start'>
+      <ion-back-button defaultHref="/orders"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+       
+    <ion-item-sliding *ngFor = 'let item of drivers'>
+                   
+      <ion-item lines='inset' button [routerLink]="['/route',item.name]" >
+        <ion-label>
+         {{item.name}}
+          <p>status:  {{item.status}}</p>
+        </ion-label>
+        
+      </ion-item>
+
+
+    </ion-item-sliding>
+  </ion-list>
+
+
+
+
+</ion-content>

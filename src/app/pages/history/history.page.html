@@ -1,12 +1,26 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>history</ion-title>
+    <ion-title>History</ion-title>
     <ion-buttons slot='start'>
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-button href="/home">Back</ion-button>
     </ion-buttons>
+    <ion-button slot='end' fill='clear' [routerLink]="['/filter']">filter</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item *ngFor='let individualOrder of orders'>
+    <ion-label>
+      {{individualOrder.orderId}}
+      <p>Latitude: {{individualOrder.lat}}</p>
+      <p>Longtitude: {{individualOrder.long}}</p>
+      <p>Items: </p>
+      <p *ngFor='let items of individualOrder.items | keyvalue'>
+        ○ {{items.key}}: {{items.value}}
+      </p>
+      <p>Time to delivery: {{individualOrder.time}}</p>
+    </ion-label>
 
+
+  </ion-item>
 </ion-content>

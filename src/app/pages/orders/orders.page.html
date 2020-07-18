@@ -9,7 +9,24 @@
 
 <ion-content>
   <div #mapElement class='map'></div>
+  <ion-button expand='full' routerLink="/driver">Select driver</ion-button>
+
+  <!--
+  <div>    
+    <ion-label>driver</ion-label>
+    <ion-select  placeholder="selectDriver" [(ngModel)]='driver'>
+      <ion-select-option value="A01">A01</ion-select-option>
+      <ion-select-option value="A02">A02</ion-select-option>
+    </ion-select>   
+</div>
+-->
+
+<div *ngIf = "driver">
+  <ion-button expand = "block" (click) = "assignOrder()">Submit</ion-button>
+</div>
+  
   <ion-list>
+       
     <ion-item-sliding *ngFor = 'let item of orders'>
                    
       <ion-item lines='inset' button [routerLink]="['/tracking',item.id]" >

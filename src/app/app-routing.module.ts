@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { DataResolverService } from './resolver/data-resolver.service';
 
 const routes: Routes = [
   {
@@ -48,6 +49,20 @@ const routes: Routes = [
   {
     path: 'history',
     loadChildren: () => import('./pages/history/history.module').then( m => m.HistoryPageModule)
+  },{
+    path: 'history/:id',
+    resolve:{
+      special:DataResolverService
+    },
+    loadChildren: () => import('./pages/history/history.module').then( m => m.HistoryPageModule)
+  },
+  {
+    path: 'driver',
+    loadChildren: () => import('./pages/driver/driver.module').then( m => m.DriverPageModule)
+  },
+  {
+    path: 'filter',
+    loadChildren: () => import('./pages/filter/filter.module').then( m => m.FilterPageModule)
   },
   
 ];
