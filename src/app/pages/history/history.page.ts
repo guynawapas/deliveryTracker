@@ -3,6 +3,8 @@ import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router'
 import { OrderWithDict, OrderWithDictService } from 'src/app/services/order-with-dict.service';
 import { DataService } from 'src/app/services/data.service';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -15,8 +17,7 @@ export class HistoryPage implements OnInit {
   filteredOrders: OrderWithDict[];
   doFilter: boolean;
   filters: {};
-  driverCollections: AngularFirestoreCollection<any>;
-
+ 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private orderWithDictService: OrderWithDictService,
@@ -24,6 +25,7 @@ export class HistoryPage implements OnInit {
     private dataService: DataService) { }
 
   ngOnInit() {
+    
     if (this.route.snapshot.data['special']) {
       this.filters = this.route.snapshot.data['special'];
       this.doFilter = true;
@@ -34,18 +36,22 @@ export class HistoryPage implements OnInit {
       this.orders = res;
       if (this.doFilter) {
         console.log('did filter');
+
        
+        
+        
         this.filteredOrders=this.filterHistory();
       
         this.orders = this.filteredOrders;
         console.log('history', this.orders);
 
       }
-     
 
     });
 
   }
+  
+
   filterHistory() {
     
     this.filteredOrders=this.orders;
