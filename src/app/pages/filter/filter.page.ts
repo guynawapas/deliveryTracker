@@ -17,6 +17,7 @@ export class FilterPage implements OnInit {
     orderId:string
 
   };
+  date:string;
   constructor(private dataService:DataService,
     private nav:NavController,
     private route:Router) { }
@@ -31,6 +32,10 @@ export class FilterPage implements OnInit {
    }
   }
   saveFilter(){
+    if(this.date){
+      this.filters.date=this.date.substring(5,10);
+    }
+    
     console.log('saved filter');
     this.dataService.setData("f",this.filters);
     this.route.navigateByUrl('history/f')

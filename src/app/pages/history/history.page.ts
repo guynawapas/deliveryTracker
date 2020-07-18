@@ -34,9 +34,9 @@ export class HistoryPage implements OnInit {
       this.orders = res;
       if (this.doFilter) {
         console.log('did filter');
-        //do some filter stuff
+       
         this.filteredOrders=this.filterHistory();
-        console.log('._.',this.filteredOrders);
+      
         this.orders = this.filteredOrders;
         console.log('history', this.orders);
 
@@ -47,37 +47,45 @@ export class HistoryPage implements OnInit {
 
   }
   filterHistory() {
+    
     this.filteredOrders=this.orders;
     for (let key of Object.keys(this.filters)) {
-      //console.log('filtering:',key);
-      if (this.filters[key] == 'any'){continue;} 
+      //console.log('key',key);
+      if (this.filters[key] == 'any'){
+       // console.log('continued',key);
+        continue;} 
       else if (key == 'items') {
         let temp = [];
-        for(let Od of this.orders){
+        for(let Od of this.filteredOrders){
           for(let keyOrder of Object.keys(Od.items)){
-           // console.log('key in loop',keyOrder,this.filters[key],keyOrder==this.filters[key]);
             if(keyOrder==this.filters[key]){
               temp.push(Od);
               break;
             }
           }
         }
-        //console.log('temp',temp);
+       // console.log('items finish',this.filteredOrders);
         this.filteredOrders=temp;
-        //console.log('filtered',this.filteredOrders);
-        
       } else if (key == "driver") {
         this.db.collection('Driver').doc(key).valueChanges().subscribe(
           val=>console.log('drive',val)
         );
-      } else {
+      }else if(key=='date'){
+        //console.log('at date b4 filter',this.filteredOrders);
         this.filteredOrders = this.filteredOrders.filter(
-          order => order[key] == this.filters[key]
+          order => order[key].substring(5,10) == this.filters[key]
         );
-        //console.log('after filtered',key,this.filteredOrders);
-
+        //console.log('at date after filter',this.filteredOrders);
+      } else {
+        let temp2=[];
+        for(let Od of this.filteredOrders){
+          if(Od[key]==this.filters[key]){
+            temp2.push(Od);
+          }
+        }
+        this.filteredOrders=temp2;
+        //console.log('after else',this.filteredOrders);
       }
-
     }
     return this.filteredOrders;
   }
