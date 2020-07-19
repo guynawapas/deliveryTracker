@@ -17,7 +17,7 @@ export class HistoryPage implements OnInit {
   filteredOrders: OrderWithDict[];
   doFilter: boolean;
   filters: {};
- 
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private orderWithDictService: OrderWithDictService,
@@ -25,11 +25,11 @@ export class HistoryPage implements OnInit {
     private dataService: DataService) { }
 
   ngOnInit() {
-    
+
     if (this.route.snapshot.data['special']) {
       this.filters = this.route.snapshot.data['special'];
       this.doFilter = true;
-      console.log('special!',this.filters);
+      console.log('special!', this.filters);
     }
     this.orderWithDictService.getOrders().subscribe(res => {
 
@@ -37,11 +37,11 @@ export class HistoryPage implements OnInit {
       if (this.doFilter) {
         console.log('did filter');
 
-       
-        
-        
-        this.filteredOrders=this.filterHistory();
-      
+
+
+
+        this.filteredOrders = this.filterHistory();
+
         this.orders = this.filteredOrders;
         console.log('history', this.orders);
 
@@ -50,47 +50,38 @@ export class HistoryPage implements OnInit {
     });
 
   }
-  
+
 
   filterHistory() {
-    
-    this.filteredOrders=this.orders;
+
+    this.filteredOrders = this.orders;
     for (let key of Object.keys(this.filters)) {
-      //console.log('key',key);
-      if (this.filters[key] == 'any'){
-       // console.log('continued',key);
-        continue;} 
+      if (this.filters[key] == 'any') {continue;}
       else if (key == 'items') {
         let temp = [];
-        for(let Od of this.filteredOrders){
-          for(let keyOrder of Object.keys(Od.items)){
-            if(keyOrder==this.filters[key]){
+        for (let Od of this.filteredOrders) {
+          for (let keyOrder of Object.keys(Od.items)) {
+            if (keyOrder == this.filters[key]) {
               temp.push(Od);
               break;
             }
           }
         }
-       // console.log('items finish',this.filteredOrders);
-        this.filteredOrders=temp;
+        this.filteredOrders = temp;
       } else if (key == "driver") {
-        this.db.collection('Driver').doc(key).valueChanges().subscribe(
-          val=>console.log('drive',val)
-        );
-      }else if(key=='date'){
-        //console.log('at date b4 filter',this.filteredOrders);
+        continue;
+      } else if (key == 'date') {
         this.filteredOrders = this.filteredOrders.filter(
-          order => order[key].substring(5,10) == this.filters[key]
+          order => order[key].substring(5, 10) == this.filters[key]
         );
-        //console.log('at date after filter',this.filteredOrders);
       } else {
-        let temp2=[];
-        for(let Od of this.filteredOrders){
-          if(Od[key]==this.filters[key]){
+        let temp2 = [];
+        for (let Od of this.filteredOrders) {
+          if (Od[key] == this.filters[key]) {
             temp2.push(Od);
           }
         }
-        this.filteredOrders=temp2;
-        //console.log('after else',this.filteredOrders);
+        this.filteredOrders = temp2;
       }
     }
     return this.filteredOrders;

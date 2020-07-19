@@ -74,10 +74,10 @@ export class OrdersPage implements OnInit, AfterContentInit {
     this.orderWithDictService.getOrders().subscribe(res => {
       this.orders = res;
       // console.log('orders',this.orders);
-      this.intervalOrders = this.orders;
+      //this.intervalOrders = this.orders;
       this.filterInterval();
       this.markers = this.intervalOrders;
-     
+     console.log("markers",this.markers);
         
       
       //console.log('markers after = orders',this.markers);
@@ -97,17 +97,20 @@ export class OrdersPage implements OnInit, AfterContentInit {
 
   addMarkersToMap(markers) {
     for (let marker of markers) {
+     
       let position = new google.maps.LatLng(marker.lat, marker.long);
       let mapMarker = new google.maps.Marker({
         position: position,
         orderId: marker.orderId,
         latitude: marker.lat,
-        longitude: marker.long
+        longitude: marker.long,
+        
       })
-
+      
       mapMarker.setMap(this.map);
       this.addInfoWindowToMarker(mapMarker);
     }
+
   }
 
   addInfoWindowToMarker(marker) {
@@ -247,6 +250,7 @@ export class OrdersPage implements OnInit, AfterContentInit {
 
     let nextInterval = this.getNextInterval();
     let today = this.getCurrentDate();
+    //console.log(nextInterval);
     for (let ele of this.orders) {
       // console.log(ele);
       //add all order needed to be delivered in next interval
@@ -255,11 +259,11 @@ export class OrdersPage implements OnInit, AfterContentInit {
       //console.log(ele.time,orderDate,x,today);
 
       if (ele.time == nextInterval && orderDate == today) {
-        //console.log("pushed!");
+       // console.log("pushed!");
         this.intervalOrders.push(ele);
       }
     }
-    //console.log(this.intervalOrders);
+    //console.log("after filter",this.intervalOrders);
   }
 
   assignOrder() {

@@ -38,7 +38,7 @@ export class FilterPage implements OnInit {
     
     console.log('saved filter');
     this.dataService.setData("f",this.filters);
-    this.route.navigateByUrl('history/f')
+    this.route.navigateByUrl('history/f');
   }
 
 }

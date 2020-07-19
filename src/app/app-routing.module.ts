@@ -64,6 +64,27 @@ const routes: Routes = [
     path: 'filter',
     loadChildren: () => import('./pages/filter/filter.module').then( m => m.FilterPageModule)
   },
+  {
+    path: 'route',
+    loadChildren: () => import('./pages/route/route.module').then( m => m.RoutePageModule)
+  },{
+    path: 'route/:id',
+    loadChildren: () => import('./pages/route/route.module').then( m => m.RoutePageModule)
+  },
+  {
+    path: 'dropbox',
+    loadChildren: () => import('./pages/dropbox/dropbox.module').then( m => m.DropboxPageModule)
+  },
+  {
+    path: 'dropbox-detail',
+    loadChildren: () => import('./pages/dropbox-detail/dropbox-detail.module').then( m => m.DropboxDetailPageModule)
+  },{
+    path: 'dropbox-detail/:id', 
+    resolve:{
+      special:DataResolverService
+    },
+    loadChildren: () => import('./pages/dropbox-detail/dropbox-detail.module').then( m => m.DropboxDetailPageModule)
+  }
   
 ];
 

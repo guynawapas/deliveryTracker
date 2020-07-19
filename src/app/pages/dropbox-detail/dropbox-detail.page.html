@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detail</ion-title>
+    <ion-buttons slot='start'>
+      <ion-back-button defaultHref="/dropbox"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list >
+    <ion-list-header>{{orders[0]?.dropbox}}</ion-list-header>
+    <ion-item *ngFor='let order of orders'>
+      <ion-label>        
+         <p>items: </p>
+         <p *ngFor='let items of order.items | keyvalue'>
+            ○ {{items.key}}: {{items.value}}
+           </p>
+         <p>Time to delivery:  {{order.time}}</p>
+       </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

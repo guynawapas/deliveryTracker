@@ -63,6 +63,16 @@
         <ion-select-option value=18>18:00-20:00</ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-item>
+      <ion-label>DropBox</ion-label>
+      <ion-select interface="popover" [(ngModel)]='order.dropbox'>
+        <ion-select-option value="noDropbox">No dropbox/home delivery</ion-select-option>
+        <ion-select-option value="boxA">Box A</ion-select-option>
+        <ion-select-option value="boxB">Box B</ion-select-option>
+        <ion-select-option value="boxC">Box C</ion-select-option>
+        <ion-select-option value="boxD">Box D</ion-select-option>
+      </ion-select>
+    </ion-item>
   
   </ion-list>
 </ion-content>

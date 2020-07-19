@@ -12,6 +12,7 @@ export interface OrderWithDict{
   date:string;
   time:number;
   delivered:boolean;
+  dropbox:string;
 }
 
 

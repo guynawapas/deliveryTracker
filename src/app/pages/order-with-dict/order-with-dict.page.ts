@@ -18,7 +18,8 @@ order:OrderWithDict={
   long:undefined,
   time:undefined,
   date:'',
-  delivered:false
+  delivered:false,
+  dropbox:''
 };
 item1Name:string;
 item2Name:string;
@@ -41,7 +42,21 @@ maxDate=new Date().toISOString();
     
   }
   saveOrder(){
-   
+   if(this.order.dropbox!="noDropbox"){
+    if(this.order.dropbox=='boxA'){
+      this.order.lat=13.755587;
+      this.order.long=100.502605;
+    }else if(this.order.dropbox=='boxB'){
+      this.order.lat=13.755600;
+      this.order.long=100.502605;
+    }else if(this.order.dropbox=='boxC'){
+      this.order.lat=13.755587;
+      this.order.long=100.502700;
+    }else if(this.order.dropbox=='boxD'){
+      this.order.lat=13.755600;
+      this.order.long=100.502700;
+    }
+   }
     
     this.stockService.deductFromStock(this.order);
     this.order.items[this.item1Name]=this.item1;
