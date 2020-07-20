@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DataResolverService } from './resolver/data-resolver.service';
+import { DriverResolverService } from './resolver/driver-resolver.service';
 
 const routes: Routes = [
   {
@@ -60,7 +61,9 @@ const routes: Routes = [
     path: 'driver',
     loadChildren: () => import('./pages/driver/driver.module').then( m => m.DriverPageModule)
   },{
-    path: 'driver/:drivers',
+    path: 'driver/:id', resolve:{
+      special:DriverResolverService
+    },
     loadChildren: () => import('./pages/driver/driver.module').then( m => m.DriverPageModule)
   },
   {
@@ -71,7 +74,7 @@ const routes: Routes = [
     path: 'route',
     loadChildren: () => import('./pages/route/route.module').then( m => m.RoutePageModule)
   },{
-    path: 'route/:id',
+    path: 'route/:name',
     loadChildren: () => import('./pages/route/route.module').then( m => m.RoutePageModule)
   },
   {

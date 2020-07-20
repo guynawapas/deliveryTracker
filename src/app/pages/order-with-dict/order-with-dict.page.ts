@@ -62,10 +62,7 @@ maxDate=new Date().toISOString();
     this.order.items[this.item1Name]=this.item1;
     this.order.items[this.item2Name]=this.item2;
     this.order.time=+this.time;
-    // for(const key in this.order){
-    //   console.log(key);
-    //   console.log(this.order[key]);
-    // }
+    
     this.orderWithDictService.addOrder(this.order);
     this.nav.navigateBack('orders');
   }

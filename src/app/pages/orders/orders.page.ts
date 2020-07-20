@@ -97,30 +97,54 @@ export class OrdersPage implements OnInit, AfterContentInit {
         position: position,
         orderId: marker.orderId,
         latitude: marker.lat,
-        longitude: marker.long
+        longitude: marker.long,
+        icon: { url:"http://maps.google.com/mapfiles/ms/icons/green-dot.png" }
       })
 
       mapMarker.setMap(this.map);
       this.addInfoWindowToMarker(mapMarker);
     }
-    let cp =  {
-      orderId: "CP Fresh Mart",
-      lat: "13.789781",
-      long: "100.567365"
-    };
-    let position = new google.maps.LatLng(cp.lat, cp.long);
+    let cpstore =  [
+      {
+        orderId: "CP",
+        lat: "13.789781",
+        long: "100.567365"
+      },
+      {
+        orderId: "A",
+        lat: "13.782356",
+        long: "100.567288"
+      },
+      {
+        orderId: "B",
+        lat: "13.789129",
+        long: "100.553405"
+      },
+      {
+        orderId: "C",
+        lat: "13.778876",
+        long: "100.561817"
+      },
+      {
+        orderId: "D",
+        lat: "13.795878",
+        long: "100.554569"
+      }
+
+    ];
+    for( let cp of cpstore){
+      let position = new google.maps.LatLng(cp.lat, cp.long);
       let mapMarker = new google.maps.Marker({
         position: position,
         orderId: cp.orderId,
         latitude: cp.lat,
         longitude: cp.long,
-        icon:{
-          url:"http://maps.google.com/mapfiles/ms/icons/green-dot.png"
-        }
-        
-      });
+        label: cp.orderId
+      })
       mapMarker.setMap(this.map);
       this.addInfoWindowToMarker(mapMarker);
+    }
+    
   }
 
   addInfoWindowToMarker(marker) {
@@ -295,12 +319,12 @@ export class OrdersPage implements OnInit, AfterContentInit {
           longitude: itm.longitude
         })
         itm.setMap(null);
-        this.status = this.status + 1;
+        c = c + 1;
       }
     }
 
-    this.updataStatus(this.drivers, this.status);
-    this.driverService.setData(42,this.drivers);
+    this.updataStatus(this.drivers,c);
+    this.driverService.setData("42",this.drivers);
     this.selectItem = [];
     this.driver = null;
   }
@@ -322,6 +346,11 @@ export class OrdersPage implements OnInit, AfterContentInit {
       }
     }
     console.log('drivers array', this.drivers);
+  }
+  toDriversPage(){
+    //console.log('drivers before navigate',this.drivers);
+    this.driverService.setData("42",this.drivers);
+    this.router.navigateByUrl('/driver/42');
   }
  
 }

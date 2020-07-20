@@ -7,13 +7,19 @@ import { IonicModule } from '@ionic/angular';
 import { RoutePageRoutingModule } from './route-routing.module';
 
 import { RoutePage } from './route.page';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RoutePageRoutingModule
+    RoutePageRoutingModule,RouterModule.forChild([
+      {
+        path: '',
+        component: RoutePage
+      }
+    ])
   ],
   declarations: [RoutePage]
 })

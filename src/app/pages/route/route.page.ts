@@ -13,7 +13,7 @@ declare var google: any;
 })
 export class RoutePage {
   id: any;
-  driver: any;
+  driver: any={};
   map: any;
   infoWindows: any = [];
   array: any = [];
@@ -24,14 +24,16 @@ export class RoutePage {
 
   ionViewDidEnter() {
 
-    this.driver = this.route.snapshot.paramMap.get('name');
+    this.driver['name'] = this.route.snapshot.paramMap.get('name');
+   
     this.displayMap();
+    
   }
 
   getAssignOrders() {
 
     this.driverCollections = this.afs.collection(
-      'Driver/' + this.driver + '/orders');
+      'Driver/' + this.driver.name + '/orders');
     this.assignOrders = this.driverCollections.snapshotChanges().pipe(
       map(actions =>
         actions.map(a => {
@@ -45,7 +47,9 @@ export class RoutePage {
     );
     this.assignOrders.subscribe(assignOrders => {
       this.array = assignOrders;
+      this.driver['status']=this.array.length;
       console.log('array', this.array);
+     
       this.addMarkersToMaps(this.array);
     });
 
@@ -55,7 +59,7 @@ export class RoutePage {
 
     this.getAssignOrders();
     const location = new google.maps.LatLng(13.7563, 100.5018);
-
+   
     const option = {
       center: location,
       zoom: 15,
@@ -67,6 +71,8 @@ export class RoutePage {
 
   }
   addMarkersToMaps(markers) {
+    
+    
     for (let marker of markers) {
       let position = new google.maps.LatLng(marker.latitude, marker.longitude);
       let mapMarker = new google.maps.Marker({
@@ -75,11 +81,12 @@ export class RoutePage {
         latitude: marker.latitude,
         longitude: marker.longitude
       });
-
+      
       mapMarker.setMap(this.map);
       //console.log('done', mapMarker);
       this.addInfoWindowToMarker(mapMarker);
     }
+    
   }
 
   addInfoWindowToMarker(marker) {

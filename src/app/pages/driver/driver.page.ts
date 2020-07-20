@@ -28,6 +28,7 @@ export class DriverPage implements OnInit {
   ngOnInit() {
     if(this.route.snapshot.data['special']){
       this.array = this.route.snapshot.data['special'];
+      console.log('special exist',this.route.snapshot.data['special']);
     }
     this.drivers = this.array;
     console.log('drivers',this.drivers);
