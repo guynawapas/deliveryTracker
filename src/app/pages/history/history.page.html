@@ -1,10 +1,12 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>History</ion-title>
     <ion-buttons slot='start'>
-      <ion-button href="/home">Back</ion-button>
+        <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-button slot='end' fill='clear' [routerLink]="['/filter']">filter</ion-button>
+    <ion-buttons slot="end">
+        <ion-button slot='end' [routerLink]="['/filter']">filter</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

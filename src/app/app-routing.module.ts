@@ -59,6 +59,9 @@ const routes: Routes = [
   {
     path: 'driver',
     loadChildren: () => import('./pages/driver/driver.module').then( m => m.DriverPageModule)
+  },{
+    path: 'driver/:drivers',
+    loadChildren: () => import('./pages/driver/driver.module').then( m => m.DriverPageModule)
   },
   {
     path: 'filter',

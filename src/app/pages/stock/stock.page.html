@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Current Stock</ion-title>
     <ion-buttons slot='start'>
       <ion-back-button defaultHref="/home"></ion-back-button>
@@ -9,9 +9,11 @@
 
 <ion-content>
 <ion-list *ngIf='stock'>
-  <ion-card *ngFor='let ele of stock.items | keyvalue'>
-    {{ele.key}}: {{ele.value}}
-    
+  <ion-card *ngFor='let ele of stock.items | keyvalue'> 
+    <ion-card-header>
+      <ion-title>{{ele.key}} : {{ele.value}}</ion-title>
+    </ion-card-header>
   </ion-card>
 </ion-list>
+
 </ion-content>

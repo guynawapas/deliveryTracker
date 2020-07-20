@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>filter</ion-title>
     <ion-buttons slot='start'>
       <ion-back-button defaultHref="/history"></ion-back-button>
@@ -18,15 +18,7 @@
       <ion-select-option value="Beetroot">Beetroot</ion-select-option>
     </ion-select>
   </ion-item>
-  <!--<ion-item>
-    <ion-label>Driver</ion-label>
-    <ion-select interface="popover" [(ngModel)]='filters.driver' >
-      <ion-select-option value="any">Any</ion-select-option>
-      <ion-select-option value="A01">A01</ion-select-option>
-      <ion-select-option value="A02">A02</ion-select-option>
-      
-    </ion-select>
-  </ion-item>-->
+  
   <ion-item>
     <ion-label >DD MM</ion-label>
     <ion-datetime displayFormat='DD/MM' placeholder='DD MM' [(ngModel)]='date'></ion-datetime>
@@ -44,11 +36,9 @@
   </ion-item>
   <ion-item>
     <ion-label >OrderId</ion-label>
-    <ion-input slot='end'required type='text' placeholder="OrderId" [(ngModel)]='filters.orderId'></ion-input>
+    <ion-input slot='end' required type='text' placeholder="OrderId" [(ngModel)]='filters.orderId'></ion-input>
   </ion-item>
+  <ion-button expand = "block" type="submit"  (click)="saveFilter()" routerLink='/history/f'>
+      See filtered orders
+    </ion-button>
 </ion-content>
-<ion-fab horizontal='end' vertical='bottom'>
-
-  <ion-fab-button (click)="saveFilter()" routerLink='/history/f'>Save</ion-fab-button>
-
-</ion-fab>

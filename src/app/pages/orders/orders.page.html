@@ -22,7 +22,7 @@
   </div>
 
   <div *ngIf = "driver">
-    <ion-button expand = "block" type="submit" (click) = "assignOrder()">
+    <ion-button expand = "block" (click) = "assignOrder()">
       Confirm
       <ion-icon name="checkmark-outline"></ion-icon>
     </ion-button>
@@ -62,7 +62,7 @@
           <ion-icon name="person"></ion-icon>
         </ion-fab-button>
         <ion-fab-list side="start">
-          <ion-chip routerLink="/driver" color="primary">
+          <ion-chip [routerLink]="['/driver',42]" color="primary">
             <ion-title>View Driver Status</ion-title>
           </ion-chip>
         </ion-fab-list>

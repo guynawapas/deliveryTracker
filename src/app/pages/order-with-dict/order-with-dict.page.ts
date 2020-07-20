@@ -44,17 +44,17 @@ maxDate=new Date().toISOString();
   saveOrder(){
    if(this.order.dropbox!="noDropbox"){
     if(this.order.dropbox=='boxA'){
-      this.order.lat=13.755587;
-      this.order.long=100.502605;
+      this.order.lat=13.782356;
+      this.order.long=100.567288;
     }else if(this.order.dropbox=='boxB'){
-      this.order.lat=13.755600;
-      this.order.long=100.502605;
+      this.order.lat=13.789129;
+      this.order.long=100.553405;
     }else if(this.order.dropbox=='boxC'){
-      this.order.lat=13.755587;
-      this.order.long=100.502700;
+      this.order.lat=13.778876;
+      this.order.long=100.561817;
     }else if(this.order.dropbox=='boxD'){
-      this.order.lat=13.755600;
-      this.order.long=100.502700;
+      this.order.lat=13.795878;
+      this.order.long=100.554569;
     }
    }
     
