@@ -58,7 +58,7 @@ export class RoutePage {
   displayMap() {
 
     this.getAssignOrders();
-    const location = new google.maps.LatLng(13.7563, 100.5018);
+    const location = new google.maps.LatLng(13.789781, 100.567365);
    
     const option = {
       center: location,
@@ -71,7 +71,21 @@ export class RoutePage {
 
   }
   addMarkersToMaps(markers) {
-    
+    let cp =
+      {
+        orderId: "CP",
+        lat: "13.789781",
+        long: "100.567365"
+      }
+      let position = new google.maps.LatLng(cp.lat, cp.long);
+      let mapMarker = new google.maps.Marker({
+        position: position,
+        orderId: cp.orderId,
+        latitude: cp.lat,
+        longitude: cp.long,
+        label: cp.orderId
+      })
+      mapMarker.setMap(this.map);
     
     for (let marker of markers) {
       let position = new google.maps.LatLng(marker.latitude, marker.longitude);

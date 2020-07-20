@@ -149,7 +149,11 @@ export class OrdersPage implements OnInit, AfterContentInit {
 
   addInfoWindowToMarker(marker) {
     let infoWindowContent ="";
-    if(marker.orderId=='CP Fresh Mart'){
+    if(marker.orderId=='CP'
+    || marker.orderId=='A'
+    || marker.orderId=='B'
+    || marker.orderId=='C'
+    || marker.orderId=='D'){
       infoWindowContent = '<div id="content">' +
       '<h2 id="firstHeading" class"firstHeading">' + marker.orderId + '</h2>' +
       '<p>Latitude: ' + marker.latitude + '</p>' +
@@ -169,11 +173,16 @@ export class OrdersPage implements OnInit, AfterContentInit {
     });
 
     marker.addListener('click', () => {
+      
       this.closeAllInfoWindows();
       infoWindow.open(this.map, marker);
       console.log('click!', marker.orderId);
 
-      if(marker.orderId!='CP Fresh Mart'){
+      if(marker.orderId!='CP'
+    && marker.orderId!='A'
+    && marker.orderId!='B'
+    && marker.orderId!='C'
+    && marker.orderId!='D'){
         google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
           document.getElementById('select').addEventListener('click', () => {
             console.log('select button clicked!');

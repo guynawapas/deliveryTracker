@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header >
+  <ion-toolbar color='primary'>
     <ion-title>route</ion-title>
     <ion-buttons slot='start'>
       <ion-back-button defaultHref="/driver"></ion-back-button>
@@ -18,7 +18,7 @@
     <ion-item-sliding *ngFor = "let pos of assignOrders | async">
       <ion-item>
         <ion-label text-wrap>
-          <p>OrderId : {{pos.OrderId}}</p>
+          <p>OrderId : {{pos.orderId}}</p>
           <p>Lat : {{pos.latitude}}</p>
           <p>Lng : {{pos.longitude}}</p>
           
