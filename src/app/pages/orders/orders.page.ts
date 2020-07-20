@@ -284,8 +284,9 @@ export class OrdersPage implements OnInit, AfterContentInit {
 
   assignOrder() {
     this.driverCollections = this.afs.collection(
-      'Driver/' + this.driver + '/orders')
-    this.status = 0;
+      'Driver/' + this.driver + '/orders');
+      var c = this.drivers[this.getDriverIndex(this.driver)]['status'];
+      console.log('driver',c);
     for (let itm of this.selectItem) {
       if (itm != null) {
         this.driverCollections.add({
@@ -302,6 +303,16 @@ export class OrdersPage implements OnInit, AfterContentInit {
     this.driverService.setData(42,this.drivers);
     this.selectItem = [];
     this.driver = null;
+  }
+  getDriverIndex(name){
+    let c=0;
+    for(let d of this.drivers){
+      if(d['name']==name){
+        return c
+      }
+      c++;
+    }
+    return -1;
   }
 
   updataStatus(drivers, num) {
